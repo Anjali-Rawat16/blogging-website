@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "title": "Introduction to Express",
+    "content": "Express is a backend framework foor node.js"
+  },
+  {
+    "id": 3,
+    "title": "My updated Blog",
+    "author": "Anjali",
+    "content": "Namaste India"
+  },
+  {
+    "id": 4,
+    "title": "nice day",
+    "author": "anjali",
+    "content": "today is my life best day"
+  },
+  {
+    "id": 4,
+    "title": "web dev",
+    "author": "Anjali",
+    "content": "Today  I am learning the web dev"
+  },
+  {
+    "id": 5,
+    "title": "moon",
+    "author": "Anjali",
+    "content": "moon is lookin very beautiful today"
+  },
+  {
+    "id": 6,
+    "title": "air",
+    "author": "Anjali",
+    "content": "Air is very imp for us"
+  },
+  {
+    
+    "id": 7,
+    "title": "Tree",
+    "author": "Anjali",
+    "content": "Tree is also important for us"
+  }
+]
