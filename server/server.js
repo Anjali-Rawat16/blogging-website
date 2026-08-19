@@ -1,8 +1,19 @@
 const express = require("express");
 const cors = require("cors");
+const mongoose = require("mongoose");
 
 const app = express();
 const port = 3000;
+
+//Connection to the Mongodb
+mongoose.connect("mongodb://127.0.0.1:27017/blogging")
+.then(()=>{
+    console.log("Mongodb connected successfully");
+})
+
+.catch((error)=>{
+    console.log("mongodb connection error:",error);
+});
 
 const postsRouter = require("./routes/posts");
 

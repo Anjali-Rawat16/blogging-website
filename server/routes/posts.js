@@ -1,91 +1,108 @@
 const express = require("express");
 const router = express.Router();
-const posts = require("../data/posts.json");
-const fs = require("fs");
+const Post = require("../models/Post");
 const path = require("path");
 
-const postsFile = path.join(__dirname, "../data/posts.json");
 
 // GET all posts
-router.get("/", (req, res) => {
-    res.json(posts);
-});
-
-// GET single post by id
-router.get("/:id", (req, res) => {
-    const id = parseInt(req.params.id);
-    const post = posts.find((post) => post.id === id);
-
-    if (!post) {
-        return res.status(404).json({
-            message: "Post not found"
+router.get("/",async (req,res)=>{
+    try{
+        const posts = await Post.find();
+        res.json(posts);
+    }
+    catch(error) {
+        res.status(500).json({
+            message:"Failed to fetch posts"
         });
     }
+});
 
-    res.json(post);
+// GET single post by Mongodb id
+router.get("/:id", async(req, res) => {
+    try{
+        const post = await Post.findById(req.params.id);
+        if(!post){
+            return res.status(404).json({
+                    message:"Post not found"
+                });
+            }
+                res.json(post);
+        } catch (error){
+            res.status(500).json({
+                message:"Failed to fetch post",
+                error:error.message
+            });
+    }
+    
 });
 
 // POST new post
-router.post("/", (req, res) => {
+router.post("/", async(req, res) => {
+    try{
     const { title, author, content } = req.body;
 
-    const newPost = {
-        id: posts.length + 1,
+    const newPost = new Post({
         title,
         author,
         content
-    };
-
-    posts.push(newPost);
-
-    fs.writeFileSync(postsFile, JSON.stringify(posts, null, 2));
-
-    res.status(201).json(newPost);
-});
+    });
+    const savedPost = await newPost.save();
+    res.status(201).json(savedPost);
+}catch(error) {
+    res.status(500).json({
+        message:"Failed to create post",
+        error:error.message
+    });
+}
+})
 
 // PUT update post
-router.put("/:id", (req, res) => {
-    const id = parseInt(req.params.id);
-
-    const post = posts.find((p) => p.id === id);
-
-    if (!post) {
+router.put("/:id", async(req, res) => {
+    try{
+        const post = await Post.findByIdAndUpdate(
+            req.params.id,
+            {
+                title:req.body.title,
+                author:req.body.author,
+                content:req.body.content
+            },
+        {
+            new:true,
+            runValidators:true
+        }
+        );
+    if(!post){
         return res.status(404).json({
-            message: "Post not found"
+            message:"post not found"
         });
     }
-
-    post.title = req.body.title;
-    post.author = req.body.author;
-    post.content = req.body.content;
-
-    fs.writeFileSync(postsFile, JSON.stringify(posts, null, 2));
-
     res.json(post);
+    } catch (error){
+        res.status(500).json({
+            message:"failed to update post",
+            error:erro.message
+        });
+    }
 });
 
 //Delete a post
-router.delete("/:id",(req,res)=>{
-    const id = parseInt(req.params.id);
+router.delete("/:id",async(req,res)=>{
+    try{
+        const post = await this.post.findByIdDelete(req.params.id);
+        if(!post){
+            return res.status(404).json({
+                message:"post not found"
+            });
+        }
+        res.json({
+            message:"Post deleted successfully"
+        });
 
-    const postIndex = posts.findIndex((post)=> post.id===id);
-
-    if(postIndex=== -1){
-        return res.status(404).json({
-            msessage:"post not found"
+    } catch (error){
+        res.status(500).json({
+            message:"post deleted successfully"
         });
     }
-
-    posts.splice(postIndex,1);
-
-    fs.writeFileSync(
-        postsFile,
-        JSON.stringify(posts,null,2)
-    );
-
-    res.json({
-        msessage:"post deleted successfully"
-    });
 });
 
 module.exports = router;
