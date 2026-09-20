@@ -123,7 +123,7 @@ function displayPosts() {
 
                 <button
                     class="read-button"
-                    onclick="readPost(${post.id})"
+                    onclick="readPost('${post._id}')"
                 >
                     Read Blog
                 </button>
@@ -131,7 +131,7 @@ function displayPosts() {
 
                 <button
                     class="edit-button"
-                    onclick="editPost(${post.id})"
+                    onclick="editPost('${post._id}')"
                 >
                     Edit
                 </button>
@@ -139,7 +139,7 @@ function displayPosts() {
 
                 <button
                     class="delete-button"
-                    onclick="deletePost(${post.id})"
+                    onclick="deletePost('${post._id}')"
                 >
                     Delete
                 </button>
@@ -552,7 +552,7 @@ function readPost(id) {
 
     const post =
         allPosts.find(
-            post => post.id === id
+            post => post._id === id
         );
 
 

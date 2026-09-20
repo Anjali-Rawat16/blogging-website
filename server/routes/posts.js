@@ -80,7 +80,7 @@ router.put("/:id", async(req, res) => {
     } catch (error){
         res.status(500).json({
             message:"failed to update post",
-            error:erro.message
+            error:error.message
         });
     }
 });
@@ -88,7 +88,7 @@ router.put("/:id", async(req, res) => {
 //Delete a post
 router.delete("/:id",async(req,res)=>{
     try{
-        const post = await this.post.findByIdDelete(req.params.id);
+        const post = await post.findByIdDelete(req.params.id);
         if(!post){
             return res.status(404).json({
                 message:"post not found"
