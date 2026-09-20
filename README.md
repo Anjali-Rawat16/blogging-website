@@ -1,33 +1,45 @@
 # Blogging Website
 
-A full-stack blogging website built with HTML, CSS, JavaScript, and Node.js.
+A full-stack blogging website built with HTML, CSS, JavaScript, Node.js, Express.js, and MongoDB.
 
 ## 📌 About the Project
 
-This project is a blogging website where users can view and interact with blog posts. It includes a frontend interface and a Node.js backend for handling blog post data.
+This project is a full-stack blogging website where users can view, create, edit, and delete blog posts.
+
+The project has a separate frontend and backend. The backend provides REST API endpoints and uses MongoDB to store blog post data.
 
 ## 🚀 Features
 
 - Responsive blogging website
 - View blog posts
-- Dynamic post handling
-- Node.js backend
+- Read individual blog posts
+- Create new blog posts
+- Edit existing blog posts
+- Delete blog posts
 - REST API for blog posts
+- MongoDB database integration
+- Mongoose for database interaction
 - Separate frontend and backend structure
-- JSON-based post data storage
 
 ## 🛠️ Technologies Used
 
 ### Frontend
+
 - HTML5
 - CSS3
 - JavaScript
 
 ### Backend
+
 - Node.js
 - Express.js
 - REST API
-- JSON
+- Mongoose
+
+### Database
+
+- MongoDB Community Server
+- MongoDB Compass
 
 ## 📁 Project Structure
 
@@ -41,53 +53,25 @@ blogging-website/
 │   └── style.css
 │
 ├── server/
-│   ├── controllers/
-│   ├── data/
-│   │   └── posts.json
+│   ├── config/
+│   │   └── db.js
+│   ├── models/
+│   │   └── Post.js
 │   ├── routes/
 │   │   └── posts.js
+│   ├── node_modules/
+│   ├── .env
 │   ├── package.json
 │   ├── package-lock.json
 │   └── server.js
 │
-└── .gitignore
-
-⚙️ Installation
-
-Clone the repository:
-
-git clone https://github.com/Anjali-Rawat16/blogging-website.git
-
-Go into the project folder:
-
-cd blogging-website
-
-Install the backend dependencies:
-
-cd server
-npm install
-▶️ Running the Project
-
-Start the backend server:
-
-npm start
-
-If your project uses nodemon, you can use:
-
-npm run dev
-
-The server will run locally, for example:
-
-http://localhost:3000
-
-Then open the frontend in your browser.
+├── .gitignore
+└── README.md
 
 🔮 Future Improvements
 User authentication
-Create and edit blog posts
-Delete blog posts
-Database integration
 Comments and likes
 Search functionality
 User profiles
+Image uploads
 Deployment
